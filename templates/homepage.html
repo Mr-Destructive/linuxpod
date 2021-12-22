@@ -5,7 +5,12 @@
     <title>LinuxPod</title>
 </head>
 <body>
+    <div class="page">
     <h2>LinuxPod</h2>
+
+    <form action="#" method="get">
+        <a href="{% url 'update_homepage' %}">Update</a>
+    </form>
     <ul>
         {% for episode in episodes %}
             <li>
@@ -14,5 +19,6 @@
             </li>
         {% endfor %}
     </ul>
+    </div>
 </body>
 </html>
