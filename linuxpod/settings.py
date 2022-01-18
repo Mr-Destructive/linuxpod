@@ -1,14 +1,15 @@
 from pathlib import Path
+import os
+import dj_database_url
+import django_heroku
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(os.path.join(BASE_DIR, 'linuxpod\.env'))
+SECRET_KEY = os.getenv("SECRET_KEY")
+DEBUG=True
 
-
-SECRET_KEY = 'django-insecure-rn+u549$%=kmfw60#hhbrogw(jsc9@1px5)vt2!hbv(r0#x-y9'
-
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['timezone-api.herokuapp.com','127.0.0.1','localhost:8000']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -53,15 +54,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'linuxpod.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -78,8 +76,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -90,11 +86,10 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_ROOT  = os.path.join(BASE_DIR, 'staticfiles')
+
+django_heroku.settings(locals())
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
